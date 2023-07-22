@@ -8,6 +8,8 @@ def getsender():
     return sender_email,sender_pass
 
 def send_email(file):  
+    """ Takes a text file as input (contains one email per line). Scan the file and asks user to enter email and password. Then user enters
+    subject and Body of email. A confirmation is received after email sent."""
     with open(file) as f:
         emails = f.readlines()
         sender_email , password =getsender()
