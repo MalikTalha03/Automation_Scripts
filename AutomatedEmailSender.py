@@ -33,5 +33,5 @@ def send_email(file):
 
     
 
-path = r"C:\Users\Malik-Talha\Desktop\Emails.txt"
+path = r"/path/to/txt file that contains emails"
 send_email(path)
