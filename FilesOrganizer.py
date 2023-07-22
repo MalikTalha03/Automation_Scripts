@@ -49,5 +49,5 @@ def organize(path):
                 else:
                     os.mkdir(path+ "/Misc")
                     shutil.move(path +"/" + file, path+"/Misc/"+file)
-path = r"C:\Users\Malik-Talha\Downloads"
+path = r"</path/to/folder>"
 organize(path)
