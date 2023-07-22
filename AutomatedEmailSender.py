@@ -3,6 +3,7 @@ import regex
 import smtplib
 
 def getsender():
+    """Get email and password from user and returns same."""
     sender_email=str(input("Enter Your Email address: "))
     sender_pass=str(input("Enter your Password: "))
     return sender_email,sender_pass
@@ -15,25 +16,24 @@ def send_email(file):
         sender_email , password =getsender()
         subject = str(input("Enter Subject: "))
         message = str(input("Enter Message: "))
-        for email in emails:
-            email=email.strip()
-            try:
-                server = smtplib.SMTP('smtp.gmail.com', 587)
-                server.starttls()
-                server.login(sender_email, password)
+        recipients = [email.strip() for email in emails if email.strip()]
+        try:
+            server = smtplib.SMTP('smtp.gmail.com', 587)
+            server.starttls()
+            server.login(sender_email, password)
                 
-                msg = EmailMessage()
-                msg['Subject'] = subject
-                msg['From'] = sender_email
-                msg['To'] = email
-                msg.set_content(message)
-                server.sendmail(sender_email, email, msg.as_string())
-                server.quit()  # Close the connection to the SMTP server
-                print("Email sent successfully! to : "+ email )
-            except Exception as e:
-                print("Error sending email:", e)
+            msg = EmailMessage()
+            msg['Subject'] = subject
+            msg['From'] = sender_email
+            msg['To'] = ', '.join(recipients)
+            msg.set_content(message)
+            server.sendmail(sender_email, recipients, msg.as_string())
+            server.quit()  # Close the connection to the SMTP server
+            print("Email sent successfully! " )
+        except Exception as e:
+            print("Error sending email:", e)
 
     
 
-path = r"/path/to/txt file that contains emails"
+path = r"path/to/text file that contain emails(one per line)"
 send_email(path)
